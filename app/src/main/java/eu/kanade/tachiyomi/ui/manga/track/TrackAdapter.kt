@@ -46,6 +46,5 @@ class TrackAdapter(controller: TrackController) : RecyclerView.Adapter<TrackHold
         fun onScoreClick(position: Int)
         fun onStartDateClick(position: Int)
         fun onFinishDateClick(position: Int)
-        fun onSetReadClick(position: Int)
     }
 }
