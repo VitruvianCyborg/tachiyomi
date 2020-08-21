@@ -27,8 +27,7 @@ class TrackController :
     SetTrackStatusDialog.Listener,
     SetTrackChaptersDialog.Listener,
     SetTrackScoreDialog.Listener,
-    SetTrackReadingDatesDialog.Listener,
-    SetTrackSetReadDialog.Listener {
+    SetTrackReadingDatesDialog.Listener {
 
     constructor(manga: Manga?) : super(
         Bundle().apply {
@@ -192,17 +191,6 @@ class TrackController :
             SetTrackReadingDatesDialog.ReadingDate.Finish -> presenter.setFinishDate(item, date)
         }
         binding.swipeRefresh.isRefreshing = true
-    }
-
-    override fun onSetReadClick(position: Int) {
-        val item = adapter?.getItem(position) ?: return
-        if (item.track == null) return
-
-        SetTrackSetReadDialog(this, item).showDialog(router)
-    }
-
-    override fun setRead(latestTrackedChapter: Int) {
-        presenter.importChapters(latestTrackedChapter)
     }
 
     private companion object {
