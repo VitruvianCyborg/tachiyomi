@@ -31,7 +31,6 @@ class TrackHolder(private val binding: TrackItemBinding, adapter: TrackAdapter) 
         binding.trackScore.setOnClickListener { listener.onScoreClick(bindingAdapterPosition) }
         binding.trackStartDate.setOnClickListener { listener.onStartDateClick(bindingAdapterPosition) }
         binding.trackFinishDate.setOnClickListener { listener.onFinishDateClick(bindingAdapterPosition) }
-        binding.trackSetRead.setOnClickListener { listener.onSetReadClick(bindingAdapterPosition) }
     }
 
     @SuppressLint("SetTextI18n")
@@ -61,14 +60,6 @@ class TrackHolder(private val binding: TrackItemBinding, adapter: TrackAdapter) 
                 binding.vertDivider3.isVisible = false
                 binding.trackStartDate.isVisible = false
                 binding.trackFinishDate.isVisible = false
-            }
-
-            // check if any chapters have been read on tracking
-            if (track.last_chapter_read > 0) {
-                binding.trackSetRead.text = "Mark chapters read up to chapter " + "${track.last_chapter_read}"
-            } else {
-                // hide button if no chapters read
-                binding.trackSetRead.isVisible = false
             }
         }
     }
