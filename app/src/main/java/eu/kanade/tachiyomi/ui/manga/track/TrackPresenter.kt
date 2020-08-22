@@ -171,6 +171,7 @@ class TrackPresenter(
 
         // reads chapter until latestTrackedChapter or it reaches maximum chapter number
         while (i < sortedChapters.count() && sortedChapters[i].chapter_number <= latestTrackedChapter) {
+
             sortedChapters[i].read = true
             i++
         }
