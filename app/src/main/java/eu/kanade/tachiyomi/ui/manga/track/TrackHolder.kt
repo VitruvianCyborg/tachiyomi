@@ -9,7 +9,6 @@ import eu.kanade.tachiyomi.data.preference.PreferencesHelper
 import eu.kanade.tachiyomi.databinding.TrackItemBinding
 import eu.kanade.tachiyomi.ui.base.holder.BaseViewHolder
 import eu.kanade.tachiyomi.util.view.popupMenu
-import java.text.DateFormat
 import uy.kohesive.injekt.injectLazy
 import java.text.DateFormat
 
