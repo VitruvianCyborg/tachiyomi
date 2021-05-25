@@ -19,12 +19,12 @@ class GetTrackChaptersDialog<T> : DialogController
 
     private var sourceChapters = emptyList<Chapter>()
 
-    constructor(target: T, item: TrackItem, chapters: List<Chapter>) : super(
+    constructor(target: TrackSheet, item: TrackItem, chapters: List<Chapter>) : super(
         Bundle().apply {
             putSerializable(KEY_ITEM_TRACK, item.track)
         }
     ) {
-        targetController = target
+        targetController = target.controller
         this.item = item
         sourceChapters = chapters
     }

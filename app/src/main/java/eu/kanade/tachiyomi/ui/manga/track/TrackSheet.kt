@@ -2,9 +2,11 @@ package eu.kanade.tachiyomi.ui.manga.track
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.R.string
 import eu.kanade.tachiyomi.data.database.models.Manga
 import eu.kanade.tachiyomi.data.track.UnattendedTrackService
@@ -29,7 +31,8 @@ class TrackSheet(
     SetTrackStatusDialog.Listener,
     SetTrackChaptersDialog.Listener,
     SetTrackScoreDialog.Listener,
-    SetTrackReadingDatesDialog.Listener {
+    SetTrackReadingDatesDialog.Listener,
+    GetTrackChaptersDialog.Listener {
 
     private lateinit var binding: TrackControllerBinding
 
@@ -162,6 +165,30 @@ class TrackSheet(
 
     fun getSearchDialog(): TrackSearchDialog? {
         return controller.router.getControllerWithTag(TAG_SEARCH_CONTROLLER) as? TrackSearchDialog
+    }
+
+    override fun onMenuItemClick(position: Int, menuItem: MenuItem) {
+        when (menuItem.itemId) {
+            R.id.track_get_chapters -> {
+                onGetChaptersClick(position)
+            }
+            R.id.track_remove -> {
+                val item = adapter?.getItem(position) ?: return
+                controller.presenter.unregisterTracking(item.service)
+            }
+        }
+    }
+
+    private fun onGetChaptersClick(position: Int) {
+        val item = adapter?.getItem(position) ?: return
+        if (item.track == null) return
+        val chapters = controller.presenter.getSourceChapters()
+
+        GetTrackChaptersDialog(this, item, chapters)
+    }
+
+    override fun getChaptersRead(latestTrackedChapter: Int) {
+        controller.presenter.syncChaptersRead(latestTrackedChapter)
     }
 
     private companion object {

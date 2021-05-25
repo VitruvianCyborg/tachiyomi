@@ -699,6 +699,10 @@ class MangaPresenter(
             .subscribeLatestCache(MangaController::onNextTrackers)
     }
 
+    fun getSourceChapters(): List<Chapter> {
+        return db.getChapters(manga).executeAsBlocking()
+    }
+
     fun refreshTrackers() {
         refreshTrackersJob?.cancel()
         refreshTrackersJob = launchIO {
@@ -811,6 +815,19 @@ class MangaPresenter(
         val track = item.track!!
         track.finished_reading_date = date
         updateRemote(track, item.service)
+    }
+
+    fun syncChaptersRead(latestTrackedChapter: Int) {
+        // sort chapters by source order such that sortedChapters[0] will return the latest source chapter
+        val sortedChapters = getSourceChapters().sortedByDescending { it.source_order }
+        var i = 0
+
+        // reads chapter until latestTrackedChapter or it reaches maximum chapter number
+        while (i < sortedChapters.count() && sortedChapters[i].chapter_number <= latestTrackedChapter) {
+            sortedChapters[i].read = true
+            i++
+        }
+        db.updateChaptersProgress(sortedChapters).executeAsBlocking()
     }
 
     // Track sheet - end
