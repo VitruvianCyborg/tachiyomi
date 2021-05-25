@@ -13,15 +13,23 @@ object PreferenceKeys {
 
     const val confirmExit = "pref_confirm_exit"
 
-    const val hideBottomBar = "pref_hide_bottom_bar_on_scroll"
+    const val hideBottomBarOnScroll = "pref_hide_bottom_bar_on_scroll"
 
-    const val rotation = "pref_rotation_type_key"
+    const val showSideNavOnBottom = "pref_show_side_nav_on_bottom"
 
     const val enableTransitions = "pref_enable_transitions_key"
 
     const val doubleTapAnimationSpeed = "pref_double_tap_anim_speed"
 
     const val showPageNumber = "pref_show_page_number_key"
+
+    const val dualPageSplitPaged = "pref_dual_page_split"
+
+    const val dualPageSplitWebtoon = "pref_dual_page_split_webtoon"
+
+    const val dualPageInvertPaged = "pref_dual_page_invert"
+
+    const val dualPageInvertWebtoon = "pref_dual_page_invert_webtoon"
 
     const val showReadingMode = "pref_show_reading_mode"
 
@@ -43,7 +51,11 @@ object PreferenceKeys {
 
     const val colorFilterMode = "color_filter_mode"
 
-    const val defaultViewer = "pref_default_viewer_key"
+    const val grayscale = "pref_grayscale"
+
+    const val defaultReadingMode = "pref_default_reading_mode_key"
+
+    const val defaultOrientationType = "pref_default_orientation_type_key"
 
     const val imageScaleType = "pref_image_scale_type_key"
 
@@ -57,13 +69,23 @@ object PreferenceKeys {
 
     const val readWithTapping = "reader_tap"
 
-    const val readWithTappingInverted = "reader_tapping_inverted"
+    const val pagerNavInverted = "reader_tapping_inverted"
+
+    const val webtoonNavInverted = "reader_tapping_inverted_webtoon"
 
     const val readWithLongTap = "reader_long_tap"
 
     const val readWithVolumeKeys = "reader_volume_keys"
 
     const val readWithVolumeKeysInverted = "reader_volume_keys_inverted"
+
+    const val navigationModePager = "reader_navigation_mode_pager"
+
+    const val navigationModeWebtoon = "reader_navigation_mode_webtoon"
+
+    const val showNavigationOverlayNewUser = "reader_navigation_overlay_new_user"
+
+    const val showNavigationOverlayOnStart = "reader_navigation_overlay_on_start"
 
     const val webtoonSidePadding = "webtoon_side_padding"
 
@@ -76,6 +98,8 @@ object PreferenceKeys {
     const val updateOnlyNonCompleted = "pref_update_only_non_completed_key"
 
     const val autoUpdateTrack = "pref_auto_update_manga_sync_key"
+
+    const val autoAddTrack = "pref_auto_add_track_key"
 
     const val lastUsedSource = "last_catalogue_source"
 
@@ -90,6 +114,8 @@ object PreferenceKeys {
     const val downloadsDirectory = "download_directory"
 
     const val downloadOnlyOverWifi = "pref_download_only_over_wifi_key"
+
+    const val folderPerManga = "create_folder_per_manga"
 
     const val numberOfBackups = "backup_slots"
 
@@ -106,6 +132,7 @@ object PreferenceKeys {
     const val libraryUpdateRestriction = "library_update_restriction"
 
     const val libraryUpdateCategories = "library_update_categories"
+    const val libraryUpdateCategoriesExclude = "library_update_categories_exclude"
 
     const val libraryUpdatePrioritization = "library_update_prioritization"
 
@@ -117,15 +144,19 @@ object PreferenceKeys {
 
     const val filterCompleted = "pref_filter_library_completed"
 
+    const val filterTracked = "pref_filter_library_tracked"
+
     const val librarySortingMode = "library_sorting_mode"
 
     const val automaticExtUpdates = "automatic_ext_updates"
 
-    const val allowNsfwSource = "allow_nsfw_source"
+    const val showNsfwSource = "show_nsfw_source"
+    const val showNsfwExtension = "show_nsfw_extension"
+    const val labelNsfwExtension = "label_nsfw_extension"
 
     const val startScreen = "start_screen"
 
-    const val useBiometricLock = "use_biometric_lock"
+    const val useAuthenticator = "use_biometric_lock"
 
     const val lockAppAfter = "lock_app_after"
 
@@ -137,11 +168,14 @@ object PreferenceKeys {
 
     const val autoUpdateMetadata = "auto_update_metadata"
 
+    const val autoUpdateTrackers = "auto_update_trackers"
+
     const val showLibraryUpdateErrors = "show_library_update_errors"
 
     const val downloadNew = "download_new"
 
     const val downloadNewCategories = "download_new_categories"
+    const val downloadNewCategoriesExclude = "download_new_categories_exclude"
 
     const val libraryDisplayMode = "pref_display_mode_library"
 
@@ -161,11 +195,13 @@ object PreferenceKeys {
 
     const val categoryTabs = "display_category_tabs"
 
+    const val categoryNumberOfItems = "display_number_of_items"
+
     const val alwaysShowChapterTransition = "always_show_chapter_transition"
 
     const val searchPinnedSourcesOnly = "search_pinned_sources_only"
 
-    const val enableDoh = "enable_doh"
+    const val dohProvider = "doh_provider"
 
     const val defaultChapterFilterByRead = "default_chapter_filter_by_read"
 

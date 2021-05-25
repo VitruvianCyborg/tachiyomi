@@ -3,15 +3,11 @@ package eu.kanade.tachiyomi.ui.manga.info
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import coil.loadAny
 import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.data.database.models.Manga
-import eu.kanade.tachiyomi.data.glide.GlideApp
-import eu.kanade.tachiyomi.data.glide.MangaThumbnail
-import eu.kanade.tachiyomi.data.glide.toMangaThumbnail
 import eu.kanade.tachiyomi.data.track.TrackManager
 import eu.kanade.tachiyomi.databinding.MangaInfoHeaderBinding
 import eu.kanade.tachiyomi.source.Source
@@ -21,11 +17,6 @@ import eu.kanade.tachiyomi.source.online.HttpSource
 import eu.kanade.tachiyomi.ui.manga.MangaController
 import eu.kanade.tachiyomi.util.system.copyToClipboard
 import eu.kanade.tachiyomi.util.view.setChips
-import eu.kanade.tachiyomi.util.view.setTooltip
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
@@ -37,7 +28,8 @@ import uy.kohesive.injekt.injectLazy
 
 class MangaInfoHeaderAdapter(
     private val controller: MangaController,
-    private val fromSource: Boolean
+    private val fromSource: Boolean,
+    private val isTablet: Boolean,
 ) :
     RecyclerView.Adapter<MangaInfoHeaderAdapter.HeaderViewHolder>() {
 
@@ -47,11 +39,9 @@ class MangaInfoHeaderAdapter(
     private var source: Source = controller.presenter.source
     private var trackCount: Int = 0
 
-    private val scope = CoroutineScope(Job() + Dispatchers.Main)
     private lateinit var binding: MangaInfoHeaderBinding
 
     private var initialLoad: Boolean = true
-    private var currentMangaThumbnail: MangaThumbnail? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeaderViewHolder {
         binding = MangaInfoHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -90,12 +80,12 @@ class MangaInfoHeaderAdapter(
 
             binding.btnFavorite.clicks()
                 .onEach { controller.onFavoriteClick() }
-                .launchIn(scope)
+                .launchIn(controller.viewScope)
 
             if (controller.presenter.manga.favorite && controller.presenter.getCategories().isNotEmpty()) {
                 binding.btnFavorite.longClicks()
                     .onEach { controller.onCategoriesClick() }
-                    .launchIn(scope)
+                    .launchIn(controller.viewScope)
             }
 
             with(binding.btnTracking) {
@@ -103,32 +93,22 @@ class MangaInfoHeaderAdapter(
                     isVisible = true
 
                     if (trackCount > 0) {
-                        setCompoundDrawablesWithIntrinsicBounds(
-                            null,
-                            ContextCompat.getDrawable(context, R.drawable.ic_done_24dp),
-                            null,
-                            null
-                        )
+                        setIconResource(R.drawable.ic_done_24dp)
                         text = view.context.resources.getQuantityString(
                             R.plurals.num_trackers,
                             trackCount,
                             trackCount
                         )
-                        isSelected = true
+                        isActivated = true
                     } else {
-                        setCompoundDrawablesWithIntrinsicBounds(
-                            null,
-                            ContextCompat.getDrawable(context, R.drawable.ic_sync_24dp),
-                            null,
-                            null
-                        )
+                        setIconResource(R.drawable.ic_sync_24dp)
                         text = view.context.getString(R.string.manga_tracking_tab)
-                        isSelected = false
+                        isActivated = false
                     }
 
                     clicks()
                         .onEach { controller.onTrackingClick() }
-                        .launchIn(scope)
+                        .launchIn(controller.viewScope)
                 } else {
                     isVisible = false
                 }
@@ -138,8 +118,7 @@ class MangaInfoHeaderAdapter(
                 binding.btnWebview.isVisible = true
                 binding.btnWebview.clicks()
                     .onEach { controller.openMangaInWebView() }
-                    .launchIn(scope)
-                binding.btnWebview.setTooltip(R.string.action_open_in_web_view)
+                    .launchIn(controller.viewScope)
             }
 
             binding.mangaFullTitle.longClicks()
@@ -149,13 +128,13 @@ class MangaInfoHeaderAdapter(
                         binding.mangaFullTitle.text.toString()
                     )
                 }
-                .launchIn(scope)
+                .launchIn(controller.viewScope)
 
             binding.mangaFullTitle.clicks()
                 .onEach {
                     controller.performGlobalSearch(binding.mangaFullTitle.text.toString())
                 }
-                .launchIn(scope)
+                .launchIn(controller.viewScope)
 
             binding.mangaAuthor.longClicks()
                 .onEach {
@@ -164,13 +143,13 @@ class MangaInfoHeaderAdapter(
                         binding.mangaAuthor.text.toString()
                     )
                 }
-                .launchIn(scope)
+                .launchIn(controller.viewScope)
 
             binding.mangaAuthor.clicks()
                 .onEach {
                     controller.performGlobalSearch(binding.mangaAuthor.text.toString())
                 }
-                .launchIn(scope)
+                .launchIn(controller.viewScope)
 
             binding.mangaArtist.longClicks()
                 .onEach {
@@ -179,13 +158,13 @@ class MangaInfoHeaderAdapter(
                         binding.mangaArtist.text.toString()
                     )
                 }
-                .launchIn(scope)
+                .launchIn(controller.viewScope)
 
             binding.mangaArtist.clicks()
                 .onEach {
                     controller.performGlobalSearch(binding.mangaArtist.text.toString())
                 }
-                .launchIn(scope)
+                .launchIn(controller.viewScope)
 
             binding.mangaSummaryText.longClicks()
                 .onEach {
@@ -194,7 +173,7 @@ class MangaInfoHeaderAdapter(
                         binding.mangaSummaryText.text.toString()
                     )
                 }
-                .launchIn(scope)
+                .launchIn(controller.viewScope)
 
             binding.mangaCover.longClicks()
                 .onEach {
@@ -203,7 +182,7 @@ class MangaInfoHeaderAdapter(
                         controller.presenter.manga.title
                     )
                 }
-                .launchIn(scope)
+                .launchIn(controller.viewScope)
 
             setMangaInfo(manga, source)
         }
@@ -214,7 +193,6 @@ class MangaInfoHeaderAdapter(
          * @param manga manga object containing information about manga.
          * @param source the source of the manga.
          */
-        @ExperimentalCoroutinesApi
         private fun setMangaInfo(manga: Manga, source: Source?) {
             // Update full title TextView.
             binding.mangaFullTitle.text = if (manga.title.isBlank()) {
@@ -265,17 +243,8 @@ class MangaInfoHeaderAdapter(
             setFavoriteButtonState(manga.favorite)
 
             // Set cover if changed.
-            val mangaThumbnail = manga.toMangaThumbnail()
-            if (mangaThumbnail != currentMangaThumbnail) {
-                currentMangaThumbnail = mangaThumbnail
-                listOf(binding.mangaCover, binding.backdrop)
-                    .forEach {
-                        GlideApp.with(view.context)
-                            .load(mangaThumbnail)
-                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                            .centerCrop()
-                            .into(it)
-                    }
+            listOf(binding.mangaCover, binding.backdrop).forEach {
+                it.loadAny(manga)
             }
 
             // Manga info section
@@ -312,10 +281,11 @@ class MangaInfoHeaderAdapter(
                     binding.mangaInfoToggleLess.clicks()
                 )
                     .onEach { toggleMangaInfo() }
-                    .launchIn(scope)
+                    .launchIn(controller.viewScope)
 
-                // Expand manga info if navigated from source listing
-                if (initialLoad && fromSource) {
+                // Expand manga info if navigated from source listing or explicitly set to
+                // (e.g. on tablets)
+                if (initialLoad && (fromSource || isTablet)) {
                     toggleMangaInfo()
                     initialLoad = false
                 }
@@ -352,18 +322,10 @@ class MangaInfoHeaderAdapter(
             // Set the Favorite drawable to the correct one.
             // Border drawable if false, filled drawable if true.
             binding.btnFavorite.apply {
-                setCompoundDrawablesWithIntrinsicBounds(
-                    null,
-                    ContextCompat.getDrawable(
-                        context,
-                        if (isFavorite) R.drawable.ic_favorite_24dp else R.drawable.ic_favorite_border_24dp
-                    ),
-                    null,
-                    null
-                )
+                setIconResource(if (isFavorite) R.drawable.ic_favorite_24dp else R.drawable.ic_favorite_border_24dp)
                 text =
                     context.getString(if (isFavorite) R.string.in_library else R.string.add_to_library)
-                isSelected = isFavorite
+                isActivated = isFavorite
             }
         }
     }

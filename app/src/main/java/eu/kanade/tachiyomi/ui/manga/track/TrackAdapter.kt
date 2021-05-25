@@ -5,9 +5,8 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import eu.kanade.tachiyomi.databinding.TrackItemBinding
-import eu.kanade.tachiyomi.util.view.inflate
 
-class TrackAdapter(controller: TrackController) : RecyclerView.Adapter<TrackHolder>() {
+class TrackAdapter(listener: OnClickListener) : RecyclerView.Adapter<TrackHolder>() {
 
     private lateinit var binding: TrackItemBinding
 
@@ -19,7 +18,7 @@ class TrackAdapter(controller: TrackController) : RecyclerView.Adapter<TrackHold
             }
         }
 
-    val rowClickListener: OnClickListener = controller
+    val rowClickListener: OnClickListener = listener
 
     fun getItem(index: Int): TrackItem? {
         return items.getOrNull(index)

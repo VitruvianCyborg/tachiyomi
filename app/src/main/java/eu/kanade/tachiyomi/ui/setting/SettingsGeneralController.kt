@@ -17,6 +17,7 @@ import eu.kanade.tachiyomi.util.preference.preferenceCategory
 import eu.kanade.tachiyomi.util.preference.switchPreference
 import eu.kanade.tachiyomi.util.preference.titleRes
 import eu.kanade.tachiyomi.util.system.LocaleHelper
+import eu.kanade.tachiyomi.util.system.isTablet
 import kotlinx.coroutines.flow.launchIn
 import java.util.Date
 import eu.kanade.tachiyomi.data.preference.PreferenceKeys as Keys
@@ -45,11 +46,20 @@ class SettingsGeneralController : SettingsController() {
             titleRes = R.string.pref_confirm_exit
             defaultValue = false
         }
-        switchPreference {
-            key = Keys.hideBottomBar
-            titleRes = R.string.pref_hide_bottom_bar_on_scroll
-            defaultValue = true
+        if (context.isTablet()) {
+            switchPreference {
+                key = Keys.showSideNavOnBottom
+                titleRes = R.string.pref_move_side_nav_to_bottom
+                defaultValue = false
+            }
+        } else {
+            switchPreference {
+                key = Keys.hideBottomBarOnScroll
+                titleRes = R.string.pref_hide_bottom_bar_on_scroll
+                defaultValue = true
+            }
         }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             preference {
                 key = "pref_manage_notifications"
@@ -106,17 +116,19 @@ class SettingsGeneralController : SettingsController() {
                 titleRes = R.string.pref_theme_light
                 entriesRes = arrayOf(
                     R.string.theme_light_default,
-                    R.string.theme_light_blue
+                    R.string.theme_light_blue,
+                    R.string.theme_light_strawberrydaiquiri
                 )
                 entryValues = arrayOf(
                     Values.LightThemeVariant.default.name,
-                    Values.LightThemeVariant.blue.name
+                    Values.LightThemeVariant.blue.name,
+                    Values.LightThemeVariant.strawberrydaiquiri.name
                 )
                 defaultValue = Values.LightThemeVariant.default.name
                 summary = "%s"
 
                 preferences.themeMode().asImmediateFlow { isVisible = it != Values.ThemeMode.dark }
-                    .launchIn(scope)
+                    .launchIn(viewScope)
 
                 onChange {
                     if (preferences.themeMode().get() != Values.ThemeMode.dark) {
@@ -131,18 +143,24 @@ class SettingsGeneralController : SettingsController() {
                 entriesRes = arrayOf(
                     R.string.theme_dark_default,
                     R.string.theme_dark_blue,
-                    R.string.theme_dark_amoled
+                    R.string.theme_dark_greenapple,
+                    R.string.theme_dark_midnightdusk,
+                    R.string.theme_dark_amoled,
+                    R.string.theme_dark_amoled_hotpink
                 )
                 entryValues = arrayOf(
                     Values.DarkThemeVariant.default.name,
                     Values.DarkThemeVariant.blue.name,
-                    Values.DarkThemeVariant.amoled.name
+                    Values.DarkThemeVariant.greenapple.name,
+                    Values.DarkThemeVariant.midnightdusk.name,
+                    Values.DarkThemeVariant.amoled.name,
+                    Values.DarkThemeVariant.hotpink.name
                 )
                 defaultValue = Values.DarkThemeVariant.default.name
                 summary = "%s"
 
                 preferences.themeMode().asImmediateFlow { isVisible = it != Values.ThemeMode.light }
-                    .launchIn(scope)
+                    .launchIn(viewScope)
 
                 onChange {
                     if (preferences.themeMode().get() != Values.ThemeMode.light) {
@@ -168,6 +186,7 @@ class SettingsGeneralController : SettingsController() {
                 // Due to compatibility issues:
                 // - Hebrew: `he` is copied into `iw` at build time
                 langs += arrayOf(
+                    "am",
                     "ar",
                     "be",
                     "bg",
@@ -177,6 +196,7 @@ class SettingsGeneralController : SettingsController() {
                     "cv",
                     "de",
                     "el",
+                    "eo",
                     "es",
                     "es-419",
                     "en-US",
@@ -185,6 +205,7 @@ class SettingsGeneralController : SettingsController() {
                     "fi",
                     "fil",
                     "fr",
+                    "gl",
                     "he",
                     "hi",
                     "hr",
@@ -192,13 +213,17 @@ class SettingsGeneralController : SettingsController() {
                     "in",
                     "it",
                     "ja",
+                    "jv",
                     "ka-rGE",
                     "kn",
                     "ko",
+                    "lt",
                     "lv",
                     "mr",
                     "ms",
+                    "my",
                     "nb-rNO",
+                    "ne",
                     "nl",
                     "pl",
                     "pt",
@@ -210,11 +235,13 @@ class SettingsGeneralController : SettingsController() {
                     "sk",
                     "sr",
                     "sv",
+                    "te",
                     "th",
                     "tr",
                     "uk",
                     "ur-rPK",
                     "vi",
+                    "uz",
                     "zh-rCN",
                     "zh-rTW"
                 )
@@ -240,7 +267,7 @@ class SettingsGeneralController : SettingsController() {
             listPreference {
                 key = Keys.dateFormat
                 titleRes = R.string.pref_date_format
-                entryValues = arrayOf("", "MM/dd/yy", "dd/MM/yy", "yyyy-MM-dd")
+                entryValues = arrayOf("", "MM/dd/yy", "dd/MM/yy", "yyyy-MM-dd", "dd MMM yyyy", "MMM dd, yyyy")
 
                 val now = Date().time
                 entries = entryValues.map { value ->

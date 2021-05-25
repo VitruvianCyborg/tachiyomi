@@ -61,7 +61,7 @@ class SettingsMainController : SettingsController() {
         preference {
             iconRes = R.drawable.ic_backup_24dp
             iconTint = tintColor
-            titleRes = R.string.backup
+            titleRes = R.string.label_backup
             onClick { navigateTo(SettingsBackupController()) }
         }
         preference {
@@ -69,12 +69,6 @@ class SettingsMainController : SettingsController() {
             iconTint = tintColor
             titleRes = R.string.pref_category_security
             onClick { navigateTo(SettingsSecurityController()) }
-        }
-        preference {
-            iconRes = R.drawable.ic_outline_people_alt_24dp
-            iconTint = tintColor
-            titleRes = R.string.pref_category_parental_controls
-            onClick { navigateTo(SettingsParentalControlsController()) }
         }
         preference {
             iconRes = R.drawable.ic_code_24dp

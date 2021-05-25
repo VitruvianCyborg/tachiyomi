@@ -10,6 +10,7 @@ import eu.kanade.tachiyomi.ui.base.presenter.BasePresenter
 import eu.kanade.tachiyomi.ui.recent.DateSectionItem
 import eu.kanade.tachiyomi.util.lang.toDateKey
 import rx.Observable
+import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import uy.kohesive.injekt.injectLazy
 import java.util.Calendar
@@ -27,6 +28,8 @@ class HistoryPresenter : BasePresenter<HistoryController>() {
      * Used to connect to database
      */
     val db: DatabaseHelper by injectLazy()
+
+    private var recentMangaSubscription: Subscription? = null
 
     override fun onCreate(savedState: Bundle?) {
         super.onCreate(savedState)
@@ -73,12 +76,9 @@ class HistoryPresenter : BasePresenter<HistoryController>() {
      * Reset last read of chapter to 0L
      * @param history history belonging to chapter
      */
-    fun removeFromHistory(history: History, currentSearch: String = "") {
+    fun removeFromHistory(history: History) {
         history.last_read = 0L
         db.updateHistoryLastRead(history).asRxObservable()
-            .doOnNext {
-                updateList(currentSearch)
-            }
             .subscribe()
     }
 
@@ -87,7 +87,8 @@ class HistoryPresenter : BasePresenter<HistoryController>() {
      * @param search a search query to use for filtering
      */
     fun updateList(search: String = "") {
-        getRecentMangaObservable(search = search).take(1)
+        recentMangaSubscription?.unsubscribe()
+        recentMangaSubscription = getRecentMangaObservable(search = search)
             .subscribeLatestCache(
                 { view, mangas ->
                     view.onNextManga(mangas, true)
@@ -100,12 +101,11 @@ class HistoryPresenter : BasePresenter<HistoryController>() {
      * Removes all chapters belonging to manga from history.
      * @param mangaId id of manga
      */
-    fun removeAllFromHistory(mangaId: Long, currentSearch: String = "") {
+    fun removeAllFromHistory(mangaId: Long) {
         db.getHistoryByMangaId(mangaId).asRxSingle()
             .map { list ->
                 list.forEach { it.last_read = 0L }
                 db.updateHistoryLastRead(list).executeAsBlocking()
-                updateList(currentSearch)
             }
             .subscribe()
     }
@@ -122,9 +122,9 @@ class HistoryPresenter : BasePresenter<HistoryController>() {
         }
 
         val sortFunction: (Chapter, Chapter) -> Int = when (manga.sorting) {
-            Manga.SORTING_SOURCE -> { c1, c2 -> c2.source_order.compareTo(c1.source_order) }
-            Manga.SORTING_NUMBER -> { c1, c2 -> c1.chapter_number.compareTo(c2.chapter_number) }
-            Manga.SORTING_UPLOAD_DATE -> { c1, c2 -> c1.date_upload.compareTo(c2.date_upload) }
+            Manga.CHAPTER_SORTING_SOURCE -> { c1, c2 -> c2.source_order.compareTo(c1.source_order) }
+            Manga.CHAPTER_SORTING_NUMBER -> { c1, c2 -> c1.chapter_number.compareTo(c2.chapter_number) }
+            Manga.CHAPTER_SORTING_UPLOAD_DATE -> { c1, c2 -> c1.date_upload.compareTo(c2.date_upload) }
             else -> throw NotImplementedError("Unknown sorting method")
         }
 
@@ -133,8 +133,8 @@ class HistoryPresenter : BasePresenter<HistoryController>() {
 
         val currChapterIndex = chapters.indexOfFirst { chapter.id == it.id }
         return when (manga.sorting) {
-            Manga.SORTING_SOURCE -> chapters.getOrNull(currChapterIndex + 1)
-            Manga.SORTING_NUMBER -> {
+            Manga.CHAPTER_SORTING_SOURCE -> chapters.getOrNull(currChapterIndex + 1)
+            Manga.CHAPTER_SORTING_NUMBER -> {
                 val chapterNumber = chapter.chapter_number
 
                 ((currChapterIndex + 1) until chapters.size)
@@ -144,7 +144,7 @@ class HistoryPresenter : BasePresenter<HistoryController>() {
                             it.chapter_number <= chapterNumber + 1
                     }
             }
-            Manga.SORTING_UPLOAD_DATE -> {
+            Manga.CHAPTER_SORTING_UPLOAD_DATE -> {
                 chapters.drop(currChapterIndex + 1)
                     .firstOrNull { it.date_upload >= chapter.date_upload }
             }

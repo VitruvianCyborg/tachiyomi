@@ -7,7 +7,6 @@
     <string name="label_library">Библиотека</string>
     <string name="label_recent_manga">История</string>
     <string name="label_recent_updates">Нови глави</string>
-    <string name="label_categories">Категории</string>
     <string name="label_backup">Резервно копие</string>
     <!-- Actions -->
     <string name="action_settings">Настройки</string>
@@ -15,7 +14,6 @@
     <string name="action_filter_downloaded">Изтеглени</string>
     <string name="action_filter_bookmarked">Отбелязани</string>
     <string name="action_filter_unread">Непрочетени</string>
-    <string name="action_filter_read">Прочетени</string>
     <string name="action_filter_empty">Премахни филтрирането</string>
     <string name="action_sort_alpha">Азбучен ред</string>
     <string name="action_sort_last_read">Последно четене</string>
@@ -25,7 +23,7 @@
     <string name="action_mark_as_unread">Отбележи като непрочетена</string>
     <string name="action_mark_previous_as_read">Отбележи предните глави като прочетени</string>
     <string name="action_download">Изтегли</string>
-    <string name="action_bookmark">Отметни</string>
+    <string name="action_bookmark">Отметни главата</string>
     <string name="action_remove_bookmark">Премахни отметката</string>
     <string name="action_delete">Изтрий</string>
     <string name="action_update">Обнови</string>
@@ -77,18 +75,14 @@
     <string name="default_columns">По подразбиране</string>
     <string name="pref_library_update_interval">Честота на обновяване на библиотеката</string>
     <string name="update_never">Самостоятелно</string>
-    <string name="update_1hour">На всеки час</string>
-    <string name="update_2hour">На всеки 2 часа</string>
     <string name="update_3hour">На всеки 3 часа</string>
     <string name="update_6hour">На всеки 6 часа</string>
     <string name="update_12hour">На всеки 12 часа</string>
     <string name="update_24hour">Ежедневно</string>
     <string name="update_48hour">През ден</string>
-    <string name="pref_library_update_categories">Категории, включени в глобалното обновяване</string>
     <string name="all">Всички</string>
     <string name="pref_library_update_restriction">Ограничения при обновяване</string>
     <string name="pref_library_update_restriction_summary">Обновявай само когато дадените условия са спазени</string>
-    <string name="wifi">Wi-Fi</string>
     <string name="charging">На зарядно устройство</string>
     <string name="pref_update_only_non_completed">Обновявай само излизаща манга</string>
     <string name="pref_auto_update_manga_sync">Обнови прогреса по заглавието след прочитане</string>
@@ -130,7 +124,6 @@
     <string name="zoom_start_center">Центрирано</string>
     <string name="pref_rotation_type">Въртене</string>
     <string name="rotation_free">Включено</string>
-    <string name="rotation_lock">Заключено</string>
     <string name="rotation_force_portrait">Портретно</string>
     <string name="rotation_force_landscape">Пейзажно</string>
     <string name="color_filter_r_value">R</string>
@@ -166,7 +159,6 @@
     <string name="clear_database_completed">Базата данни изчистена</string>
     <!-- About section -->
     <string name="version">Версия</string>
-    <string name="build_time">Време на създаване</string>
     <!-- ACRA -->
     <string name="pref_enable_acra">Изпращай данни за грешки</string>
     <string name="pref_acra_summary">Помага за оправянето на бъгове. Няма да се изпращат лични данни</string>
@@ -182,7 +174,6 @@
     <!-- Library fragment -->
     <string name="library_search_hint">Заглавие или автор…</string>
     <string name="updating_category">Обновяване на категорията</string>
-    <string name="confirm_delete_manga">Сигурни ли сте, че желаете да премахнете избраната манга?</string>
     <!-- Catalogue fragment -->
     <string name="source_requires_login">Източникът изисква от вас да въведете име и парола</string>
     <string name="select_source">Изберете източник</string>
@@ -311,12 +302,10 @@
     <string name="app_not_available">Приложението не е достъпно</string>
     <string name="short_recent_updates">Обновления</string>
     <string name="update_weekly">Ежеседмично</string>
-    <string name="update_monthly">Ежемесечно</string>
     <string name="default_category">Категория по подразбиране</string>
     <string name="default_category_summary">Питай всеки път</string>
     <string name="pref_crop_borders">Изрязвай границите</string>
     <string name="pref_read_with_volume_keys_inverted">Обърнати бутони за звука</string>
-    <string name="pref_download_new_categories">Категории, включени при изтегляне</string>
     <string name="pref_create_backup">Създай резервно копие</string>
     <string name="pref_create_backup_summ">Може да се използва за възстановяване на текущата библиотека</string>
     <string name="pref_restore_backup">Възстанови резервно копие</string>
@@ -332,7 +321,6 @@
     <string name="creating_backup">Създаване на резервно копие</string>
     <string name="pref_refresh_library_tracking">Обнови проследяването</string>
     <string name="pref_refresh_library_tracking_summary">Обновява статус, оценка и последно прочетена глава от услугите за проследяване</string>
-    <string name="also_delete_chapters">Също изтрий изтеглените глави</string>
     <string name="local_source">Локални</string>
     <string name="invalid_combination">\"По подразбиране\" не може да се избира с други категории</string>
     <string name="added_to_library">Мангата беше добавена към библиотеката Ви</string>
@@ -430,7 +418,6 @@
     <string name="obsolete_extension_message">Това разширение вече не е достъпно.</string>
     <string name="pref_date_format">Формат на датата</string>
     <string name="pref_category_library_update">Обновявания</string>
-    <string name="pref_category_library_categories">Категории</string>
     <string name="logout_title">Искате ли да излезете от %1$s\?</string>
     <string name="logout">Излез</string>
     <string name="logout_success">Излязохте успешно</string>
@@ -466,12 +453,9 @@
     <string name="recent_manga_time">Гл. %1$s - %2$s</string>
     <string name="updating_library">Обновяване на библиотеката</string>
     <string name="error_invalid_date_supplied">Невалидна дата</string>
-    <string name="track_finished_reading_date">Крайна дата</string>
-    <string name="track_started_reading_date">Начална дата</string>
     <string name="add_tracking">Добави проследяване</string>
     <string name="manga_info_collapse">По-малко</string>
     <string name="manga_info_expand">Повече</string>
-    <string name="manga_info_about_label">Инфо</string>
     <string name="in_library">В библиотеката</string>
     <string name="add_to_library">Добави към библиотеката</string>
     <string name="local_source_help_guide">Помощ за локални източници</string>
@@ -487,7 +471,6 @@
     <string name="label_downloaded_only">Само изтеглени</string>
     <string name="check_for_updates">Провери за ъпдейт</string>
     <string name="licenses">Лицензи за отворен код</string>
-    <string name="notices">Известия за предвартилени билдове</string>
     <string name="website">Уебсайт</string>
     <string name="battery_optimization_disabled">Оптимизацията на батерията е изключена</string>
     <string name="pref_disable_battery_optimization_summary">Помага при фонови обновявания на библиотеката и резервни копия</string>
@@ -585,7 +568,7 @@
     <string name="tabs_header">Раздели</string>
     <string name="badges_header">Значки</string>
     <string name="label_data">Данни</string>
-    <string name="pref_dns_over_https_summary">Изисква рестартиране на приложението, за да влезе в сила</string>
+    <string name="requires_app_restart">Изисква рестартиране на приложението, за да влезе в сила</string>
     <string name="label_network">Мрежа</string>
     <string name="backup_restore_missing_sources">Липсващи източници:</string>
     <string name="invalid_backup_file_missing_manga">Резервното копие не съдържа манга.</string>
@@ -634,15 +617,10 @@
     <string name="pref_remove_bookmarked_chapters">Изтрий главите с отметки</string>
     <string name="pref_category_delete_chapters">Изтрий глави</string>
     <string name="pref_category_reading_mode">Режим на четене</string>
-    <string name="ext_nsfw_warning">Може да има съдържание 18+</string>
+    <string name="ext_nsfw_warning">Може да съдържа неприличен материал 18+</string>
     <string name="ext_nsfw_short">18+</string>
     <string name="pref_jump_to_chapters">Отиди до глави при отваряне</string>
-    <string name="parental_controls_info">Тази настройка няма да спре неофициални или потенциално неправилно маркирани разширения да позволяват достъп до съдържание за възрастни в апликацията.</string>
-    <string name="pref_allow_nsfw_sources_blocked">Блокирани</string>
-    <string name="pref_allow_nsfw_sources_allowed_multisource">Блокирай разглеждането на източници, но ги показвай в списъка с разширения</string>
-    <string name="pref_allow_nsfw_sources_allowed">Позволено</string>
-    <string name="pref_allow_nsfw_sources">Източници 18+</string>
-    <string name="pref_category_parental_controls">Родителски контрол</string>
+    <string name="parental_controls_info">Тази настройка няма да спре неофициални или потенциално неправилно маркирани разширения да позволяват достъп до съдържание за възрастни (18+) в апликацията.</string>
     <string name="pref_category_theme">Тема</string>
     <string name="action_download_unread">Изтегли непрочетените глави</string>
     <string name="action_sort_date_added">Добавено на</string>
@@ -651,4 +629,12 @@
         <item quantity="one">Има %d липсваща глава</item>
         <item quantity="other">Има %d липсващи глави</item>
     </plurals>
+    <string name="pref_category_nsfw_content">Не безопасни за работа (18+) източници</string>
+    <string name="action_desc">Низходящ</string>
+    <string name="action_asc">Възходящ</string>
+    <string name="action_order_by_chapter_number">По номер на глава</string>
+    <string name="action_order_by_upload_date">По дата на качване</string>
+    <string name="action_display_show_number_of_items">Покажи предметите</string>
+    <string name="action_search_settings">Настройки за търсения</string>
+    <string name="action_filter_tracked">Следени</string>
 </resources>
