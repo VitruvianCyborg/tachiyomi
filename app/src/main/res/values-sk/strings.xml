@@ -11,7 +11,6 @@
     <string name="label_library">Knižnica</string>
     <string name="label_recent_manga">Nedávno čítané</string>
     <string name="label_recent_updates">Updaty</string>
-    <string name="label_categories">Kategórie</string>
     <string name="label_backup">Záloha</string>
     <string name="label_migration">Presun zdrojov</string>
     <string name="label_extensions">Rozšírenia</string>
@@ -22,7 +21,6 @@
     <string name="action_filter_downloaded">Stiahnuté</string>
     <string name="action_filter_bookmarked">Uložené</string>
     <string name="action_filter_unread">Neprečítané</string>
-    <string name="action_filter_read">Prečítané</string>
     <string name="action_filter_empty">Zrušiť filter</string>
     <string name="action_sort_alpha">Abecedne</string>
     <string name="action_sort_total">Všetky kapitoly</string>
@@ -60,7 +58,7 @@
     <string name="action_resume">Pokračovať</string>
     <string name="action_move">Presunúť</string>
     <string name="action_open_in_browser">Otvoriť v browseri</string>
-    <string name="action_open_in_web_view">Otvoriť vo web view</string>
+    <string name="action_open_in_web_view">Otvoriť vo WebView</string>
     <string name="action_display_mode">Zmeniť zobrazenie</string>
     <string name="action_display">Zobraziť</string>
     <string name="action_display_grid">Mriežka</string>
@@ -93,21 +91,16 @@
     <string name="default_columns">Predvolené</string>
     <string name="pref_library_update_interval">Frekvencia aktualizácie knižnice</string>
     <string name="update_never">Manuálne</string>
-    <string name="update_1hour">Raz za hodinu</string>
-    <string name="update_2hour">Každé 2 hodiny</string>
     <string name="update_3hour">Každé 3 hodiny</string>
     <string name="update_6hour">Každých 6 hodín</string>
     <string name="update_12hour">Každých 12 hodín</string>
     <string name="update_24hour">Raz za deň</string>
     <string name="update_48hour">Každé 2 dni</string>
     <string name="update_weekly">Každý týždeň</string>
-    <string name="update_monthly">Každý mesiac</string>
-    <string name="pref_library_update_categories">Kategórie, ktoré sa majú zahrnúť do globálnej aktualizácie</string>
     <string name="all">Všetko</string>
     <string name="pref_library_update_prioritization">Poradie aktualizácie knižnice</string>
     <string name="pref_library_update_restriction">Obmedzenia aktualizácii knižnice</string>
     <string name="pref_library_update_restriction_summary">Aktualizovať len vtedy, keď sú splnené podmienky</string>
-    <string name="wifi">Wi-Fi</string>
     <string name="charging">Nabíjanie</string>
     <string name="pref_update_only_non_completed">Aktualizovať iba nedokončenú Mangu</string>
     <string name="pref_auto_update_manga_sync">Synchronizovať kapitoly po prečítaní</string>
@@ -186,7 +179,6 @@
     <string name="double_tap_anim_speed_fast">Rýchlo</string>
     <string name="pref_rotation_type">Rotácia</string>
     <string name="rotation_free">Voľná</string>
-    <string name="rotation_lock">Zamknúť</string>
     <string name="rotation_force_portrait">Iba na výšku</string>
     <string name="rotation_force_landscape">Iba na šírku</string>
     <string name="color_filter_r_value">R</string>
@@ -205,7 +197,6 @@
     <string name="fourth_to_last">Štvrtá kapitola od konca</string>
     <string name="fifth_to_last">Piata kapitola od konca</string>
     <string name="pref_download_new">Stiahnuť nové kapitoly</string>
-    <string name="pref_download_new_categories">Kategórie, ktoré sa majú zahrnúť do sťahovania</string>
     <string name="services">Služby</string>
     <string name="backup">Zálohovanie</string>
     <string name="pref_create_backup">Vytvoriť zálohu</string>
@@ -244,7 +235,6 @@
     <string name="pref_refresh_library_tracking">Obnoviť metadáta sledovania</string>
     <string name="pref_refresh_library_tracking_summary">Aktualizuje stav, skóre a poslednú čítanú kapitolu zo sledovacích služieb</string>
     <string name="version">Verzia</string>
-    <string name="build_time">Čas sestavenia</string>
     <string name="pref_enable_acra">Odosielať správy o zlyhaní</string>
     <string name="pref_acra_summary">Pomáha opraviť akékoľvek chyby. Nebudú odoslané žiadne citlivé údaje</string>
     <string name="login_title">Prihlásení pre %1$s</string>
@@ -258,8 +248,6 @@
     <string name="library_search_hint">Názov alebo autor…</string>
     <string name="updating_category">Aktualizuje sa kategória</string>
     <string name="local_source_badge">Lokálny</string>
-    <string name="confirm_delete_manga">Naozaj chcete odstrániť vybraté mangy\?</string>
-    <string name="also_delete_chapters">Odstráňte tiež stiahnuté kapitoly</string>
     <string name="source_requires_login">Tento zdroj vyžaduje, aby ste sa prihlásili</string>
     <string name="select_source">Vyberte zdroj</string>
     <string name="no_valid_sources">Povoľte aspoň jeden platný zdroj</string>
@@ -283,7 +271,7 @@
     <string name="manga_removed_library">Odstránené z knižnice</string>
     <string name="delete_downloads_for_manga">Odstrániť stiahnuté kapitoly\?</string>
     <string name="copied_to_clipboard">%1$s bol skopírovaný do schránky</string>
-    <string name="source_not_installed">Zdroj nie je nainštalovaný</string>
+    <string name="source_not_installed">Zdroj nie je nainštalovaný: %1$s</string>
     <string name="manga_chapters_tab">Kapitoly</string>
     <string name="manga_chapter_no_title">Bez názvu</string>
     <string name="display_mode_chapter">Kapitola %1$s</string>
@@ -365,7 +353,6 @@
     <string name="notification_no_connection_body">Pripojenie nie je k dispozícii</string>
     <string name="file_select_cover">Vyberte obrázok obalu</string>
     <string name="file_select_backup">Vyberte záložný súbor</string>
-    <string name="file_select_icon">Vyberte ikonu zástupca</string>
     <string name="update_check_confirm">Stiahnuť</string>
     <string name="update_check_ignore">Ignorovať</string>
     <string name="update_check_no_new_updates">Žiadné nové aktualizácie</string>

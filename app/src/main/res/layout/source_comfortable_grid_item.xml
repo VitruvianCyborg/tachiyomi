@@ -25,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="?attr/colorSurface"
+                android:scaleType="centerCrop"
                 tools:ignore="ContentDescription"
                 tools:src="@mipmap/ic_launcher" />
 
@@ -83,12 +84,13 @@
 
             </LinearLayout>
 
-            <ProgressBar
+            <com.google.android.material.progressindicator.CircularProgressIndicator
                 android:id="@+id/progress"
-                style="?android:attr/progressBarStyleSmall"
+                style="@style/Theme.Widget.CircularProgressIndicator.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:indeterminate="true"
                 android:visibility="gone" />
 
         </FrameLayout>
