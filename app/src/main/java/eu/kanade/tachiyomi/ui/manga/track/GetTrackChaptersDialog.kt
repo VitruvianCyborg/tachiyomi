@@ -13,18 +13,18 @@ import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 class GetTrackChaptersDialog<T> : DialogController
-        where T : Controller, T : GetTrackChaptersDialog.Listener {
+        where T : Controller {
 
     private val item: TrackItem
 
     private var sourceChapters = emptyList<Chapter>()
 
-    constructor(target: TrackSheet, item: TrackItem, chapters: List<Chapter>) : super(
+    constructor(target: T, item: TrackItem, chapters: List<Chapter>) : super(
         Bundle().apply {
             putSerializable(KEY_ITEM_TRACK, item.track)
         }
     ) {
-        targetController = target.controller
+        targetController = target
         this.item = item
         sourceChapters = chapters
     }

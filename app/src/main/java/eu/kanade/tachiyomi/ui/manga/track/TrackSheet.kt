@@ -184,7 +184,7 @@ class TrackSheet(
         if (item.track == null) return
         val chapters = controller.presenter.getSourceChapters()
 
-        GetTrackChaptersDialog(this, item, chapters)
+        GetTrackChaptersDialog(controller, item, chapters)
     }
 
     override fun getChaptersRead(latestTrackedChapter: Int) {

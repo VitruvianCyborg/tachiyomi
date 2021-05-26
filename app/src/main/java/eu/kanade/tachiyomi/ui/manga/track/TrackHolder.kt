@@ -3,15 +3,12 @@ package eu.kanade.tachiyomi.ui.manga.track
 import android.annotation.SuppressLint
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.RecyclerView
 import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.data.database.models.Track
 import eu.kanade.tachiyomi.data.preference.PreferencesHelper
 import eu.kanade.tachiyomi.databinding.TrackItemBinding
-import eu.kanade.tachiyomi.ui.base.holder.BaseViewHolder
 import eu.kanade.tachiyomi.util.view.popupMenu
-import androidx.recyclerview.widget.RecyclerView
-import eu.kanade.tachiyomi.data.preference.PreferencesHelper
-import eu.kanade.tachiyomi.databinding.TrackItemBinding
 import uy.kohesive.injekt.injectLazy
 import java.text.DateFormat
 
